@@ -42,6 +42,8 @@ class _PedidosState extends State<Pedidos> {
           funcionarioMatricula:
               int.parse(e.typedColByName("Funcionario_Matricula"))))
     ];
+
+    setState(() {});
   }
 
   @override
@@ -65,15 +67,6 @@ class _PedidosState extends State<Pedidos> {
                       CardPedido(
                           dataPedido: pedido.dataPedido,
                           totalPedido: pedido.totalPedido),
-                    Card(
-                      color: Colors.deepOrangeAccent,
-                      child: ListTile(
-                          mouseCursor: SystemMouseCursors.click,
-                          leading: const Icon(Icons.lens),
-                          title: Text(
-                              "${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year}"),
-                          subtitle: const Text("R\$ 50.00")),
-                    ),
                   ]),
                 ],
               )),

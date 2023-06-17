@@ -17,8 +17,8 @@ class CardPedido extends StatelessWidget {
       child: ListTile(
         mouseCursor: SystemMouseCursors.click,
         leading: const Icon(Icons.lens),
-        title: Text("$dataPedido"),
-        subtitle: Text("R\$ ${totalPedido}"),
+        title: Text(dataPedido),
+        subtitle: Text("R\$ ${totalPedido.toStringAsFixed(2)}"),
       ),
     );
   }
