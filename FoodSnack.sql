@@ -22,6 +22,7 @@ CREATE TABLE IF NOT EXISTS Item (
 CREATE TABLE IF NOT EXISTS Funcionario (
 	Matricula INT NOT NULL AUTO_INCREMENT,
 	Nome VARCHAR(100) NOT NULL,
+	Senha VARCHAR(40) NOT NULL,
 	Funcao VARCHAR(45) NOT NULL,
 	CPF VARCHAR(11) NOT NULL,
 	DataNasc DATE NOT NULL,
@@ -30,6 +31,7 @@ CREATE TABLE IF NOT EXISTS Funcionario (
 CREATE TABLE IF NOT EXISTS Cliente (
 	CPF VARCHAR(11) NOT NULL,
 	Nome VARCHAR(100) NOT NULL,
+    Senha VARCHAR(40) NOT NULL,
 	Dta_nasc DATE NOT NULL,
 	PRIMARY KEY (CPF));
     
@@ -81,37 +83,25 @@ INSERT INTO Tipo_Item (Tipo) VALUES ('Bebidas');
 INSERT INTO Tipo_Item (Tipo) VALUES ('Doces');
 
 INSERT INTO Item (Descricao, Valor, Tipo_Item_id) VALUES ('Coxinha de frango com catupiry', 6.50, 1);
-INSERT INTO Item (Descricao, Valor, Tipo_Item_id) VALUES ('Coca Cola', 5.15, 2);
-INSERT INTO Item (Descricao, Valor, Tipo_Item_id) VALUES ('Chiclete', 1.50, 3);
-
-INSERT INTO Estoque (Lote, Quant_Disp, Validade, Item_id) VALUES (14785236, '7', '2023-04-26', '1');
-INSERT INTO Estoque (Lote, Quant_Disp, Validade, Item_id) VALUES (14527895, '12', '2025-10-20', '2');
-INSERT INTO Estoque (Lote, Quant_Disp, Validade, Item_id) VALUES (00088899, '60', '2025-02-18', '3');
-
-INSERT INTO Cliente (CPF, Nome, Dta_nasc) VALUES ('25415558451', 'Filomena', '3002-11-30');
-INSERT INTO Cliente (CPF, Nome, Dta_nasc) VALUES ('45698775322', 'Mathias', '2002-01-24');
-INSERT INTO Cliente (CPF, Nome, Dta_nasc) VALUES ('21445775533', 'Mayara', '1904-07-04');
-
-INSERT INTO Funcionario (Matricula, Nome, Funcao, CPF, DataNasc) VALUES (6924,'Tia Lurdes','25415558451', 'Atendente', '0001-01-01');
-
-INSERT INTO Pedido (Numero, Status_pedido, Data_pedido, Total_pedido, Cliente_CPF, Funcionario_Matricula ) VALUES (240423,'A','2023-04-25', 666.66, 45698775322, 6924);
-
-INSERT INTO Pedido_has_Estoque (numero, lote, quantidade) VALUES (240423, 14785236, 6);
-INSERT INTO Pedido_has_Estoque (numero, lote, quantidade) VALUES (240423, 00088899, 55);
-INSERT INTO Pedido_has_Estoque (numero, lote, quantidade) VALUES (240423, 14527895, 11);
-
 INSERT INTO Item (Descricao, Valor, Tipo_Item_id) VALUES ('Empada de frango', 5.50, 1);
 INSERT INTO Item (Descricao, Valor, Tipo_Item_id) VALUES ('Hambugão', 6.50, 1);
 INSERT INTO Item (Descricao, Valor, Tipo_Item_id) VALUES ('Empada de palmito', 6.50, 1);
 INSERT INTO Item (Descricao, Valor, Tipo_Item_id) VALUES ('Enroladinho de Presunto', 5.50, 1);
+
+INSERT INTO Item (Descricao, Valor, Tipo_Item_id) VALUES ('Coca Cola', 5.15, 2);
 INSERT INTO Item (Descricao, Valor, Tipo_Item_id) VALUES ('Sprite', 5.50, 2);
 INSERT INTO Item (Descricao, Valor, Tipo_Item_id) VALUES ('Suco de Laranja', 5.50, 2);
 INSERT INTO Item (Descricao, Valor, Tipo_Item_id) VALUES ('Guaravita', 5.50, 2);
 
+INSERT INTO Item (Descricao, Valor, Tipo_Item_id) VALUES ('Chiclete', 1.50, 3);
 INSERT INTO Item (Descricao, Valor, Tipo_Item_id) VALUES ('Pé de moleque', 2.00, 3);
 INSERT INTO Item (Descricao, Valor, Tipo_Item_id) VALUES ('Snickers', 4.50, 3);
 INSERT INTO Item (Descricao, Valor, Tipo_Item_id) VALUES ('Pirulito big big', 1.00, 3);
+INSERT INTO Item (Descricao, Valor, Tipo_Item_id) VALUES ('Dadinho', 0.50, 3);
 
+INSERT INTO Estoque (Lote, Quant_Disp, Validade, Item_id) VALUES (14785236, '7', '2023-04-26', '1');
+INSERT INTO Estoque (Lote, Quant_Disp, Validade, Item_id) VALUES (14527895, '12', '2025-10-20', '2');
+INSERT INTO Estoque (Lote, Quant_Disp, Validade, Item_id) VALUES (00088899, '60', '2025-02-18', '3');
 INSERT INTO Estoque (Lote, Quant_Disp, Validade, Item_id) VALUES (58742698, '3', '2023-04-26', '4');
 INSERT INTO Estoque (Lote, Quant_Disp, Validade, Item_id) VALUES (52368441, '3', '2023-08-03', '5');
 INSERT INTO Estoque (Lote, Quant_Disp, Validade, Item_id) VALUES (48552316, '3', '2023-07-18', '6');
@@ -122,13 +112,20 @@ INSERT INTO Estoque (Lote, Quant_Disp, Validade, Item_id) VALUES (01045236, '7',
 INSERT INTO Estoque (Lote, Quant_Disp, Validade, Item_id) VALUES (02142089, '12', '2025-12-20', '11');
 INSERT INTO Estoque (Lote, Quant_Disp, Validade, Item_id) VALUES (78445201, '10', '2024-02-01', '12');
 INSERT INTO Estoque (Lote, Quant_Disp, Validade, Item_id) VALUES (54191924, '40', '2024-04-15', '13');
+INSERT INTO Estoque (Lote, Quant_Disp, Validade, Item_id) VALUES (54191999, '40', '2024-04-15', '14');
 
-INSERT INTO Cliente (CPF, Nome, Dta_nasc) VALUES ('25210326584', 'Luisa', '2001-01-29');
-INSERT INTO Cliente (CPF, Nome, Dta_nasc) VALUES ('25145100245', 'Cleusa', '1996-07-25');
-INSERT INTO Cliente (CPF, Nome, Dta_nasc) VALUES ('54527896844', 'Julia', '1999-11-14');
-INSERT INTO Cliente (CPF, Nome, Dta_nasc) VALUES ('12026958633', 'Pedro', '2002-06-10');
-INSERT INTO Cliente (CPF, Nome, Dta_nasc) VALUES ('14856325896', 'Felipe', '2001-09-05');
+INSERT INTO Cliente (CPF, Nome, Senha, Dta_nasc) VALUES ('25415558451', 'Filomena', sha1("Filomena"), '3002-11-30');
+INSERT INTO Cliente (CPF, Nome, Senha, Dta_nasc) VALUES ('45698775322', 'Mathias', sha1("Mathias"), '2002-01-24');
+INSERT INTO Cliente (CPF, Nome, Senha, Dta_nasc) VALUES ('21445775533', 'Mayara', sha1("Mayara"), '1904-07-04');
+INSERT INTO Cliente (CPF, Nome, Senha, Dta_nasc) VALUES ('25210326584', 'Luisa', sha1("Luisa"), '2001-01-29');
+INSERT INTO Cliente (CPF, Nome, Senha, Dta_nasc) VALUES ('25145100245', 'Cleusa', sha1("Cleusa"), '1996-07-25');
+INSERT INTO Cliente (CPF, Nome, Senha, Dta_nasc) VALUES ('54527896844', 'Julia', sha1("Julia"), '1999-11-14');
+INSERT INTO Cliente (CPF, Nome, Senha, Dta_nasc) VALUES ('12026958633', 'Pedro', sha1("Pedro"), '2002-06-10');
+INSERT INTO Cliente (CPF, Nome, Senha, Dta_nasc) VALUES ('14856325896', 'Felipe', sha1("Felipe"), '2001-09-05');
 
+INSERT INTO Funcionario (Matricula, Nome, Senha, Funcao, CPF, DataNasc) VALUES (6924,'Tia Lurdes', sha1("TiaLurdes"), '25415558451', 'Atendente', '0001-01-01');
+
+INSERT INTO Pedido (Numero, Status_pedido, Data_pedido, Total_pedido, Cliente_CPF, Funcionario_Matricula ) VALUES (240423,'A','2023-04-25', 666.66, 45698775322, 6924);
 INSERT INTO Pedido (Numero, Status_pedido, Data_pedido, Total_pedido, Cliente_CPF, Funcionario_Matricula ) VALUES (240424,'P','2023-04-25', 10.50, 25415558451, 6924);
 INSERT INTO Pedido (Numero, Status_pedido, Data_pedido, Total_pedido, Cliente_CPF, Funcionario_Matricula ) VALUES (240425,'P','2023-04-25', 12.66, 21445775533, 6924);
 INSERT INTO Pedido (Numero, Status_pedido, Data_pedido, Total_pedido, Cliente_CPF, Funcionario_Matricula ) VALUES (240426,'A','2023-04-25', 20.50, 25210326584, 6924);
@@ -136,6 +133,12 @@ INSERT INTO Pedido (Numero, Status_pedido, Data_pedido, Total_pedido, Cliente_CP
 INSERT INTO Pedido (Numero, Status_pedido, Data_pedido, Total_pedido, Cliente_CPF, Funcionario_Matricula ) VALUES (240426,'A','2023-04-25', 17.50, 54527896844, 6924);
 INSERT INTO Pedido (Numero, Status_pedido, Data_pedido, Total_pedido, Cliente_CPF, Funcionario_Matricula ) VALUES (240427,'A','2023-04-25', 7.50, 12026958633, 6924);
 INSERT INTO Pedido (Numero, Status_pedido, Data_pedido, Total_pedido, Cliente_CPF, Funcionario_Matricula ) VALUES (240427,'P','2023-04-25', 10.50, 14856325896, 6924);
+
+INSERT INTO Pedido_has_Estoque (numero, lote, quantidade) VALUES (240423, 14785236, 6);
+INSERT INTO Pedido_has_Estoque (numero, lote, quantidade) VALUES (240423, 00088899, 55);
+INSERT INTO Pedido_has_Estoque (numero, lote, quantidade) VALUES (240423, 14527895, 11);
+
+
 
 INSERT INTO Pedido_has_Estoque (numero, lote, quantidade) VALUES (240424, 58742698, 6);
 INSERT INTO Pedido_has_Estoque (numero, lote, quantidade) VALUES (240424, 20201458, 6);
