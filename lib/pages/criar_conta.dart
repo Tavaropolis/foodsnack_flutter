@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:projeto_integrado/components/titulo_pagina.dart';
 
+//Banco de dados
+import '../data/db.dart';
+
 //Componentes
 import '../components/criar_conta/modal_criar_conta.dart';
 import '../components/fundo.dart';
@@ -43,7 +46,8 @@ class _CriarContaState extends State<CriarConta> {
                             padding: EdgeInsets.symmetric(
                                 horizontal:
                                     MediaQuery.of(context).size.width * 0.18,
-                                vertical: MediaQuery.of(context).size.width * 0.01),
+                                vertical:
+                                    MediaQuery.of(context).size.width * 0.01),
                             child: TextField(
                                 onChanged: (text) {},
                                 keyboardType: TextInputType.emailAddress,
@@ -60,7 +64,8 @@ class _CriarContaState extends State<CriarConta> {
                             padding: EdgeInsets.symmetric(
                                 horizontal:
                                     MediaQuery.of(context).size.width * 0.18,
-                                vertical: MediaQuery.of(context).size.width * 0.01),
+                                vertical:
+                                    MediaQuery.of(context).size.width * 0.01),
                             child: TextField(
                                 onChanged: (text) {
                                   setState(() {});
@@ -87,7 +92,8 @@ class _CriarContaState extends State<CriarConta> {
                             padding: EdgeInsets.symmetric(
                                 horizontal:
                                     MediaQuery.of(context).size.width * 0.18,
-                                vertical: MediaQuery.of(context).size.width * 0.01),
+                                vertical:
+                                    MediaQuery.of(context).size.width * 0.01),
                             child: TextField(
                                 onChanged: (text) {
                                   setState(() {});
@@ -99,7 +105,8 @@ class _CriarContaState extends State<CriarConta> {
                                     suffixIcon: IconButton(
                                         onPressed: () {
                                           setState(() {
-                                            isVisibleConfirm = !isVisibleConfirm;
+                                            isVisibleConfirm =
+                                                !isVisibleConfirm;
                                           });
                                         },
                                         icon: isVisibleConfirm
@@ -114,7 +121,8 @@ class _CriarContaState extends State<CriarConta> {
                             padding: EdgeInsets.symmetric(
                                 horizontal:
                                     MediaQuery.of(context).size.width * 0.18,
-                                vertical: MediaQuery.of(context).size.width * 0.01),
+                                vertical:
+                                    MediaQuery.of(context).size.width * 0.01),
                             child: TextField(
                                 onChanged: (text) {
                                   setState(() {});
@@ -132,7 +140,8 @@ class _CriarContaState extends State<CriarConta> {
                             padding: EdgeInsets.symmetric(
                                 horizontal:
                                     MediaQuery.of(context).size.width * 0.18,
-                                vertical: MediaQuery.of(context).size.width * 0.01),
+                                vertical:
+                                    MediaQuery.of(context).size.width * 0.01),
                             child: TextField(
                                 onChanged: (text) {
                                   setState(() {});
@@ -153,6 +162,7 @@ class _CriarContaState extends State<CriarConta> {
                                 padding: const EdgeInsets.all(8.0),
                                 child: ElevatedButton(
                                     onPressed: () {
+                                      db.query("");
                                       showModalBottomSheet<void>(
                                           context: context,
                                           builder: (BuildContext context) {

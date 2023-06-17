@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS Pedido (
     FOREIGN KEY (Cliente_CPF) REFERENCES Cliente(CPF),
     FOREIGN KEY (Funcionario_Matricula) REFERENCES Funcionario(Matricula));
     
-SELECT * FROM Pedido WHERE Status_pedido = "P";
+SELECT * FROM Cliente;
     
 CREATE TABLE IF NOT EXISTS Estoque (
 	Lote INT NOT NULL,
