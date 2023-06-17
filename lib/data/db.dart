@@ -15,7 +15,7 @@ class DbOpenClose {
       host: 'localhost',
       port: 3306,
       userName: 'root',
-      password: 'ifsp',
+      password: '1234',
       databaseName: 'foodsnack',
       // e assim que conectar
     ).then((value) {
