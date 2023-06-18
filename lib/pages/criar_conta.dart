@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:projeto_integrado/components/titulo_pagina.dart';
 
 //Banco de dados
@@ -16,6 +17,19 @@ class CriarConta extends StatefulWidget {
 }
 
 class _CriarContaState extends State<CriarConta> {
+
+  _validate() async {
+    var dtaNasc = DateFormat('yyyy-MM-dd').format(DateTime.parse(dtaNascController.text));
+
+    await db.query("INSERT INTO Cliente (Nome, Senha, CPF, Dta_nasc) VALUES ( :Nome, sha1(:Senha), :CPF, :dta_Nasc)", {"Nome": userController.text, "Senha": passwordController.text, "CPF": cpfController.text, "dta_Nasc": dtaNasc});
+  }
+
+  final userController = TextEditingController();
+  final passwordController = TextEditingController();
+  final passwordConfirmController = TextEditingController();
+  final cpfController = TextEditingController();
+  final dtaNascController = TextEditingController();
+
   bool isVisible = false;
   bool isVisibleConfirm = false;
 
@@ -49,6 +63,7 @@ class _CriarContaState extends State<CriarConta> {
                                 vertical:
                                     MediaQuery.of(context).size.width * 0.01),
                             child: TextField(
+                                controller: userController,
                                 onChanged: (text) {},
                                 keyboardType: TextInputType.emailAddress,
                                 autocorrect: true,
@@ -67,8 +82,11 @@ class _CriarContaState extends State<CriarConta> {
                                 vertical:
                                     MediaQuery.of(context).size.width * 0.01),
                             child: TextField(
+                                controller: passwordController,
                                 onChanged: (text) {
-                                  setState(() {});
+                                  setState(() {
+
+                                  });
                                 },
                                 obscureText: isVisible ? false : true,
                                 autocorrect: true,
@@ -124,12 +142,14 @@ class _CriarContaState extends State<CriarConta> {
                                 vertical:
                                     MediaQuery.of(context).size.width * 0.01),
                             child: TextField(
+                                controller: cpfController,
                                 onChanged: (text) {
                                   setState(() {});
                                 },
                                 keyboardType: TextInputType.number,
                                 autocorrect: true,
                                 textInputAction: TextInputAction.next,
+                                maxLength: 11,
                                 decoration: const InputDecoration(
                                     fillColor: Colors.white,
                                     filled: true,
@@ -143,6 +163,7 @@ class _CriarContaState extends State<CriarConta> {
                                 vertical:
                                     MediaQuery.of(context).size.width * 0.01),
                             child: TextField(
+                              controller: dtaNascController,
                                 onChanged: (text) {
                                   setState(() {});
                                 },
@@ -162,7 +183,7 @@ class _CriarContaState extends State<CriarConta> {
                                 padding: const EdgeInsets.all(8.0),
                                 child: ElevatedButton(
                                     onPressed: () {
-                                      db.query("");
+                                      _validate();
                                       showModalBottomSheet<void>(
                                           context: context,
                                           builder: (BuildContext context) {

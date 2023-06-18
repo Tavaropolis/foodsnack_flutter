@@ -3,7 +3,7 @@ import '../data/db.dart';
 class Cliente {
   final String cpf;
   final String nome;
-  final String dtaNasc;
+  final DateTime dtaNasc;
 
   static int numberOfRows = 0;
 
@@ -21,7 +21,7 @@ class Cliente {
     return cliente.rows.map((row) => Cliente(
           cpf: row.colByName('cpf')!,
           nome: row.colByName('nome')!,
-          dtaNasc: row.colByName('Dta_nasc')!,
+          dtaNasc: DateTime.parse(row.colByName('Dta_nasc')!),
         ));
   }
 }
