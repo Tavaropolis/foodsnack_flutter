@@ -10,8 +10,8 @@ class BotaoLogin extends StatelessWidget {
     required this.isActivePassword,
   });
 
-  final bool isActiveUser;
-  final bool isActivePassword;
+  final String isActiveUser;
+  final String isActivePassword;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class BotaoLogin extends StatelessWidget {
           height: 50,
           child: ElevatedButton(
               onPressed: 
-              isActiveUser == true && isActivePassword == true ? 
+              isActiveUser.isNotEmpty && isActivePassword.isNotEmpty? 
               () {
                 Navigator.push(
                   context,

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:projeto_integrado/pages/criar_conta.dart';
-import '../pages/lembrar_senha.dart';
 
 //Componentes
 import '../components/fundo.dart';
 import '../components/login/botao_login.dart';
 import '../components/login/imagem_login.dart';
+
+//Pages
+import '../pages/lembrar_senha.dart';
+import '../pages/criar_conta.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -15,12 +17,11 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  bool isActiveUser = false;
-  bool isActivePassword = false;
-  bool isVisible = false;
-
+  
   final userController = TextEditingController();
   final passwordController = TextEditingController();
+
+  bool isVisible = false;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +40,7 @@ class _LoginState extends State<Login> {
                   controller: userController,
                   onChanged: (text) {
                     setState(() {
-                      userController.text != "" ? isActiveUser = true : false;
+                     
                     });
                   },
                   keyboardType: TextInputType.emailAddress,
@@ -57,9 +58,6 @@ class _LoginState extends State<Login> {
                   controller: passwordController,
                   onChanged: (text) {
                     setState(() {
-                      passwordController.text.isNotEmpty
-                          ? isActivePassword = true
-                          : false;
                     });
                   },
                   obscureText: isVisible? false : true,
@@ -78,7 +76,7 @@ class _LoginState extends State<Login> {
                       border: const OutlineInputBorder())),
             ),
             BotaoLogin(
-                isActiveUser: isActiveUser, isActivePassword: isActivePassword),
+                isActiveUser: userController.text, isActivePassword: passwordController.text),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
