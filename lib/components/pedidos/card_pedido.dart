@@ -1,14 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
-class CardPedido extends StatelessWidget {
+class CardPedido extends StatefulWidget {
   const CardPedido({
     super.key,
     required this.dataPedido,
     required this.totalPedido,
   });
 
-  final String dataPedido;
+  final DateTime dataPedido;
   final num totalPedido;
+
+  @override
+  State<CardPedido> createState() => _CardPedidoState();
+}
+
+class _CardPedidoState extends State<CardPedido> {
+   var localFormat = DateFormat("dd/MM/yyyy");
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +25,8 @@ class CardPedido extends StatelessWidget {
       child: ListTile(
         mouseCursor: SystemMouseCursors.click,
         leading: const Icon(Icons.lens),
-        title: Text(dataPedido),
-        subtitle: Text("R\$ ${totalPedido.toStringAsFixed(2)}"),
+        title: Text(localFormat.format(widget.dataPedido).toString()),
+        subtitle: Text("R\$ ${widget.totalPedido.toStringAsFixed(2)}"),
       ),
     );
   }

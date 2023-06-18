@@ -3,7 +3,7 @@ import '../data/db.dart';
 class Pedido {
   final int numero;
   final String statusPedido;
-  final String dataPedido;
+  final DateTime dataPedido;
   final num totalPedido;
   final String clienteCPF;
   final int funcionarioMatricula;
@@ -28,7 +28,7 @@ class Pedido {
       (row) => Pedido(
           numero: int.parse(row.colByName('numero')!),
           statusPedido: row.colByName('Status_pedido')!,
-          dataPedido: row.colByName('Data_pedido')!,
+          dataPedido: DateTime.parse(row.colByName('Data_pedido')!),
           totalPedido: int.parse(row.colByName('Total_pedido')!),
           clienteCPF: row.colByName('Cliente_CPF')!,
           funcionarioMatricula: int.parse(row.colByName('Funcionario_Matricula')!)

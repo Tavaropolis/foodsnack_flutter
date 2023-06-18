@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 //Banco de dados
-import '../components/pedidos/card_pedido.dart';
 import '../data/db.dart';
 
 //Pedidos
@@ -9,6 +8,7 @@ import '../classes/pedido.dart';
 
 //Componentes
 import '../components/fundo.dart';
+import '../components/pedidos/card_pedido.dart';
 import '../components/titulo_pagina.dart';
 
 class Pedidos extends StatefulWidget {
@@ -25,6 +25,7 @@ class _PedidosState extends State<Pedidos> {
     myFuture();
   }
 
+
   List<Pedido> listaPedidos = [];
 
   Future myFuture() async {
@@ -36,7 +37,7 @@ class _PedidosState extends State<Pedidos> {
       ...pedidos.rows.map((e) => Pedido(
           numero: int.parse(e.typedColByName("Numero")),
           statusPedido: e.typedColByName("Status_pedido"),
-          dataPedido: e.typedColByName("Data_pedido"),
+          dataPedido: DateTime.parse(e.typedColByName("Data_pedido")),
           totalPedido: num.parse(e.typedColByName("Total_pedido")),
           clienteCPF: e.typedColByName("Cliente_CPF"),
           funcionarioMatricula:
