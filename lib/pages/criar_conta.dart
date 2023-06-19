@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:projeto_integrado/components/titulo_pagina.dart';
 
 //Banco de dados
 import '../data/db.dart';
 
 //Componentes
-import '../components/criar_conta/modal_criar_conta.dart';
 import '../components/fundo.dart';
+import '../components/titulo_pagina.dart';
+import '../components/criar_conta/modal_criar_conta.dart';
+import '../components/criar_conta/dialog_criar_conta.dart';
 
 class CriarConta extends StatefulWidget {
   const CriarConta({super.key});
@@ -17,11 +18,121 @@ class CriarConta extends StatefulWidget {
 }
 
 class _CriarContaState extends State<CriarConta> {
-
   _validate() async {
-    var dtaNasc = DateFormat('yyyy-MM-dd').format(DateTime.parse(dtaNascController.text));
+        
+    String? cpfConsulta;
 
-    await db.query("INSERT INTO Cliente (Nome, Senha, CPF, Dta_nasc) VALUES ( :Nome, sha1(:Senha), :CPF, :dta_Nasc)", {"Nome": userController.text, "Senha": passwordController.text, "CPF": cpfController.text, "dta_Nasc": dtaNasc});
+    var query = await db.query("SELECT * FROM Cliente WHERE CPF = :CPF", {"CPF": cpfController.text});
+    for (final row in query.rows) {
+      cpfConsulta = row.colByName("CPF");
+    }
+    query.rows.map((e) => e.assoc());
+
+    bool userActive = false;
+    bool passwordActive = false;
+    bool cpfActive = false;
+    bool dataActive = false;
+
+    userActive = verificaNome();
+    passwordActive = verificaSenha();
+    cpfActive = verificaCPF(cpfConsulta);
+    dataActive = verificaData();
+
+    if(userActive && passwordActive && cpfActive && dataActive) {
+      var dtaNasc = DateFormat('yyyy-MM-dd').format(DateTime.parse(dtaNascController.text));
+
+      try {
+        await db.query("INSERT INTO Cliente (Nome, Senha, CPF, Dta_nasc) VALUES ( :Nome, sha1(:Senha), :CPF, :dta_Nasc)", {"Nome": userController.text, "Senha": passwordController.text, "CPF": cpfController.text, "dta_Nasc": dtaNasc});
+      } on Exception catch(e) {
+         // ignore: use_build_context_synchronously
+         showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return const DialogCriarConta(mensagem: "Ocorreu um erro inesperado 😥");
+        });
+      }
+
+      // ignore: use_build_context_synchronously
+      showModalBottomSheet<void>(
+        context: context, 
+        builder: (BuildContext context) {
+          return const ModalCriarConta();
+        }
+      );
+    }
+  }
+
+  verificaNome() {
+    if (userController.text.length < 5) {
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return const DialogCriarConta(mensagem: "Nome precisa ter mais de 4 caracteres 😥");
+          });
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  verificaSenha() {
+    if (passwordController.text != passwordConfirmController.text) {
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return const DialogCriarConta(mensagem: "Os campos de senha não estão iguais 😥");
+          });
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  verificaCPF(String? cpfConsulta) {
+    if(cpfController.text.length < 11) {
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return const DialogCriarConta(mensagem: "CPF precisa ter 11 caracteres 😥");
+        }
+      );
+      return false;
+      } else if (cpfConsulta == cpfController.text) {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return const DialogCriarConta(mensagem: "CPF já cadastrado 😥");
+        });
+        return false;
+      } else {
+      try {
+        num.parse(cpfController.text);
+        return true;
+      } on Exception catch (e) {
+        print(e.runtimeType);
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return const DialogCriarConta(mensagem: "CPF precisa ter apenas números 😥");
+        });
+        return false;
+      }
+    }
+  }
+
+  verificaData() {
+    try {
+       DateFormat('yyyy-MM-dd').format(DateTime.parse(dtaNascController.text));
+       return true;
+    } on Exception catch(e) {
+      print(e.runtimeType);
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return const DialogCriarConta(mensagem: "Data com formatação errada 😥");
+        });
+      return false;
+    }
   }
 
   final userController = TextEditingController();
@@ -64,7 +175,9 @@ class _CriarContaState extends State<CriarConta> {
                                     MediaQuery.of(context).size.width * 0.01),
                             child: TextField(
                                 controller: userController,
-                                onChanged: (text) {},
+                                onChanged: (text) {
+                                  setState(() {});
+                                },
                                 keyboardType: TextInputType.emailAddress,
                                 autocorrect: true,
                                 textInputAction: TextInputAction.next,
@@ -84,9 +197,7 @@ class _CriarContaState extends State<CriarConta> {
                             child: TextField(
                                 controller: passwordController,
                                 onChanged: (text) {
-                                  setState(() {
-
-                                  });
+                                  setState(() {});
                                 },
                                 obscureText: isVisible ? false : true,
                                 autocorrect: true,
@@ -113,6 +224,7 @@ class _CriarContaState extends State<CriarConta> {
                                 vertical:
                                     MediaQuery.of(context).size.width * 0.01),
                             child: TextField(
+                                controller: passwordConfirmController,
                                 onChanged: (text) {
                                   setState(() {});
                                 },
@@ -163,7 +275,7 @@ class _CriarContaState extends State<CriarConta> {
                                 vertical:
                                     MediaQuery.of(context).size.width * 0.01),
                             child: TextField(
-                              controller: dtaNascController,
+                                controller: dtaNascController,
                                 onChanged: (text) {
                                   setState(() {});
                                 },
@@ -182,14 +294,19 @@ class _CriarContaState extends State<CriarConta> {
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: ElevatedButton(
-                                    onPressed: () {
-                                      _validate();
-                                      showModalBottomSheet<void>(
-                                          context: context,
-                                          builder: (BuildContext context) {
-                                            return const ModalCriarConta();
-                                          });
-                                    },
+                                    onPressed:
+                                        (userController.text.isNotEmpty &&
+                                                passwordController
+                                                    .text.isNotEmpty &&
+                                                passwordConfirmController
+                                                    .text.isNotEmpty &&
+                                                cpfController.text.isNotEmpty &&
+                                                dtaNascController
+                                                    .text.isNotEmpty)
+                                            ? () {
+                                                _validate();
+                                              }
+                                            : null,
                                     child: const Text("Confirmar")),
                               ))
                         ],
@@ -201,3 +318,5 @@ class _CriarContaState extends State<CriarConta> {
         ));
   }
 }
+
+

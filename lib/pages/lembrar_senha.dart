@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:projeto_integrado/components/titulo_pagina.dart';
 
 //Componentes
 import '../components/fundo.dart';
 import '../components/lembrar_senha/subtitulo_lembrar_senha.dart';
 import '../components/lembrar_senha/modal_lembrar_senha.dart';
+import '../components/titulo_pagina.dart';
 
 class LembrarSenha extends StatefulWidget {
   const LembrarSenha({super.key});
@@ -14,6 +14,9 @@ class LembrarSenha extends StatefulWidget {
 }
 
 class _LembrarSenhaState extends State<LembrarSenha> {
+
+  final emailController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,8 +42,12 @@ class _LembrarSenhaState extends State<LembrarSenha> {
                     const SubTituloLembrarSenha(),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.2),
-                      child: const TextField(
-                        decoration: InputDecoration(
+                      child:  TextField(
+                        controller: emailController,
+                        onChanged: (text) {
+                          setState(() {});
+                        },
+                        decoration: const InputDecoration(
                           fillColor: Colors.white,
                           filled: true,
                           hintText: "Insira seu email de contato",
@@ -51,13 +58,15 @@ class _LembrarSenhaState extends State<LembrarSenha> {
                         width: 150,
                         height: 50,
                         child: ElevatedButton(
-                            onPressed: () {
+                            onPressed: 
+                            emailController.text.isNotEmpty ?
+                            () {
                               showModalBottomSheet<void>(
                                   context: context,
                                   builder: (BuildContext context) {
                                     return const ModalLembrarSenha();
                                   });
-                            },
+                            } : null,
                             child: const Text("Enviar")))
                   ],
                 ),

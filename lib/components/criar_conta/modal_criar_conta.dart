@@ -12,7 +12,7 @@ class ModalCriarConta extends StatelessWidget {
         width: double.infinity,
         height: double.infinity,
         decoration: const BoxDecoration(
-          color: Colors.redAccent,
+          color: Color.fromRGBO(67, 160, 71, 1),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
