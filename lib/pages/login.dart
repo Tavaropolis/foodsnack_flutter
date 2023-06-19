@@ -39,9 +39,7 @@ class _LoginState extends State<Login> {
               child: TextField(
                   controller: userController,
                   onChanged: (text) {
-                    setState(() {
-                     
-                    });
+                    setState(() {});
                   },
                   keyboardType: TextInputType.emailAddress,
                   autocorrect: true,
@@ -57,8 +55,7 @@ class _LoginState extends State<Login> {
               child: TextField(
                   controller: passwordController,
                   onChanged: (text) {
-                    setState(() {
-                    });
+                    setState(() {});
                   },
                   obscureText: isVisible? false : true,
                   autocorrect: true,
@@ -76,7 +73,7 @@ class _LoginState extends State<Login> {
                       border: const OutlineInputBorder())),
             ),
             BotaoLogin(
-                isActiveUser: userController.text, isActivePassword: passwordController.text),
+                user: userController.text, password: passwordController.text),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

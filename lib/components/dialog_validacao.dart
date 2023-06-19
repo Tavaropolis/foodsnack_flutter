@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class DialogCriarConta extends StatelessWidget {
-  const DialogCriarConta({
+class DialogValidacao extends StatelessWidget {
+  const DialogValidacao({
     super.key,
     required this.mensagem
   });

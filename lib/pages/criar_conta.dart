@@ -8,7 +8,7 @@ import '../data/db.dart';
 import '../components/fundo.dart';
 import '../components/titulo_pagina.dart';
 import '../components/criar_conta/modal_criar_conta.dart';
-import '../components/criar_conta/dialog_criar_conta.dart';
+import '../components/dialog_validacao.dart';
 
 class CriarConta extends StatefulWidget {
   const CriarConta({super.key});
@@ -44,11 +44,13 @@ class _CriarContaState extends State<CriarConta> {
       try {
         await db.query("INSERT INTO Cliente (Nome, Senha, CPF, Dta_nasc) VALUES ( :Nome, sha1(:Senha), :CPF, :dta_Nasc)", {"Nome": userController.text, "Senha": passwordController.text, "CPF": cpfController.text, "dta_Nasc": dtaNasc});
       } on Exception catch(e) {
+        // ignore: avoid_print
+        print(e);
          // ignore: use_build_context_synchronously
-         showDialog(
+        showDialog(
           context: context,
           builder: (BuildContext context) {
-            return const DialogCriarConta(mensagem: "Ocorreu um erro inesperado 😥");
+            return const DialogValidacao(mensagem: "Ocorreu um erro inesperado 😥");
         });
       }
 
@@ -67,7 +69,7 @@ class _CriarContaState extends State<CriarConta> {
       showDialog(
           context: context,
           builder: (BuildContext context) {
-            return const DialogCriarConta(mensagem: "Nome precisa ter mais de 4 caracteres 😥");
+            return const DialogValidacao(mensagem: "Nome precisa ter mais de 4 caracteres 😥");
           });
       return false;
     } else {
@@ -80,7 +82,7 @@ class _CriarContaState extends State<CriarConta> {
       showDialog(
           context: context,
           builder: (BuildContext context) {
-            return const DialogCriarConta(mensagem: "Os campos de senha não estão iguais 😥");
+            return const DialogValidacao(mensagem: "Os campos de senha não estão iguais 😥");
           });
       return false;
     } else {
@@ -93,7 +95,7 @@ class _CriarContaState extends State<CriarConta> {
       showDialog(
           context: context,
           builder: (BuildContext context) {
-            return const DialogCriarConta(mensagem: "CPF precisa ter 11 caracteres 😥");
+            return const DialogValidacao(mensagem: "CPF precisa ter 11 caracteres 😥");
         }
       );
       return false;
@@ -101,7 +103,7 @@ class _CriarContaState extends State<CriarConta> {
         showDialog(
           context: context,
           builder: (BuildContext context) {
-            return const DialogCriarConta(mensagem: "CPF já cadastrado 😥");
+            return const DialogValidacao(mensagem: "CPF já cadastrado 😥");
         });
         return false;
       } else {
@@ -109,11 +111,12 @@ class _CriarContaState extends State<CriarConta> {
         num.parse(cpfController.text);
         return true;
       } on Exception catch (e) {
+        // ignore: avoid_print
         print(e.runtimeType);
         showDialog(
           context: context,
           builder: (BuildContext context) {
-            return const DialogCriarConta(mensagem: "CPF precisa ter apenas números 😥");
+            return const DialogValidacao(mensagem: "CPF precisa ter apenas números 😥");
         });
         return false;
       }
@@ -125,11 +128,12 @@ class _CriarContaState extends State<CriarConta> {
        DateFormat('yyyy-MM-dd').format(DateTime.parse(dtaNascController.text));
        return true;
     } on Exception catch(e) {
+      // ignore: avoid_print
       print(e.runtimeType);
       showDialog(
           context: context,
           builder: (BuildContext context) {
-            return const DialogCriarConta(mensagem: "Data com formatação errada 😥");
+            return const DialogValidacao(mensagem: "Data com formatação errada 😥");
         });
       return false;
     }
