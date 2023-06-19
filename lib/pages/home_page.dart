@@ -10,7 +10,6 @@ import '../classes/produto.dart';
 //Componentes
 import '../components/home_page/container_home.dart';
 import '../components/fundo.dart';
-import '../components/home_page/search_box.dart';
 import '../components/home_page/titulo_container.dart';
 import '../components/home_page/modal_home.dart';
 
