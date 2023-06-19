@@ -15,6 +15,7 @@ CREATE TABLE IF NOT EXISTS Item (
 	ID INT NOT NULL AUTO_INCREMENT,
 	Descricao VARCHAR(45) NOT NULL,
 	Valor DOUBLE NOT NULL,
+    Foto VARCHAR(150),
 	Tipo_Item_id INT NOT NULL,
 	PRIMARY KEY (ID, Tipo_Item_id),
 	FOREIGN KEY (Tipo_Item_id) REFERENCES Tipo_Item(ID));
@@ -82,22 +83,22 @@ INSERT INTO Tipo_Item (Tipo) VALUES ('Salgados');
 INSERT INTO Tipo_Item (Tipo) VALUES ('Bebidas');
 INSERT INTO Tipo_Item (Tipo) VALUES ('Doces');
 
-INSERT INTO Item (Descricao, Valor, Tipo_Item_id) VALUES ('Coxinha de frango com catupiry', 6.50, 1);
-INSERT INTO Item (Descricao, Valor, Tipo_Item_id) VALUES ('Empada de frango', 5.50, 1);
-INSERT INTO Item (Descricao, Valor, Tipo_Item_id) VALUES ('Hambugão', 6.50, 1);
+INSERT INTO Item (Descricao, Valor, Foto, Tipo_Item_id) VALUES ('Coxinha de frango com catupiry', 6.50, 'coxinha.jpg', 1);
+INSERT INTO Item (Descricao, Valor, Foto, Tipo_Item_id) VALUES ('Empada de frango', 5.50, 'empadadefrango.jpg', 1);
+INSERT INTO Item (Descricao, Valor, Foto, Tipo_Item_id) VALUES ('Hambugão', 6.50, 'hamburgao.jpg', 1);
 INSERT INTO Item (Descricao, Valor, Tipo_Item_id) VALUES ('Empada de palmito', 6.50, 1);
-INSERT INTO Item (Descricao, Valor, Tipo_Item_id) VALUES ('Enroladinho de Presunto', 5.50, 1);
+INSERT INTO Item (Descricao, Valor, Foto, Tipo_Item_id) VALUES ('Enroladinho de Presunto', 5.50, 'enroladinhodepresunto.jpg', 1);
 
-INSERT INTO Item (Descricao, Valor, Tipo_Item_id) VALUES ('Coca Cola', 5.15, 2);
-INSERT INTO Item (Descricao, Valor, Tipo_Item_id) VALUES ('Sprite', 5.50, 2);
-INSERT INTO Item (Descricao, Valor, Tipo_Item_id) VALUES ('Suco de Laranja', 5.50, 2);
-INSERT INTO Item (Descricao, Valor, Tipo_Item_id) VALUES ('Guaravita', 5.50, 2);
+INSERT INTO Item (Descricao, Valor, Foto, Tipo_Item_id) VALUES ('Coca Cola', 5.15, 'cocacola.jpg', 2);
+INSERT INTO Item (Descricao, Valor, Foto, Tipo_Item_id) VALUES ('Sprite', 5.50, 'sprite.jpg', 2);
+INSERT INTO Item (Descricao, Valor, Foto, Tipo_Item_id) VALUES ('Suco de Laranja', 5.50, 'sucodelaranja.jpg', 2);
+INSERT INTO Item (Descricao, Valor, Foto, Tipo_Item_id) VALUES ('Guaravita', 5.50, 'guaravita.jpg', 2);
 
-INSERT INTO Item (Descricao, Valor, Tipo_Item_id) VALUES ('Chiclete', 1.50, 3);
-INSERT INTO Item (Descricao, Valor, Tipo_Item_id) VALUES ('Pé de moleque', 2.00, 3);
-INSERT INTO Item (Descricao, Valor, Tipo_Item_id) VALUES ('Snickers', 4.50, 3);
-INSERT INTO Item (Descricao, Valor, Tipo_Item_id) VALUES ('Pirulito big big', 1.00, 3);
-INSERT INTO Item (Descricao, Valor, Tipo_Item_id) VALUES ('Dadinho', 0.50, 3);
+INSERT INTO Item (Descricao, Valor, Foto, Tipo_Item_id) VALUES ('Chiclete', 1.50, 'chiclete.jpg', 3);
+INSERT INTO Item (Descricao, Valor, Foto, Tipo_Item_id) VALUES ('Pé de moleque', 2.00, 'pedemoleque.jpg', 3);
+INSERT INTO Item (Descricao, Valor, Foto, Tipo_Item_id) VALUES ('Snickers', 4.50, 'snickers.jpg', 3);
+INSERT INTO Item (Descricao, Valor, Foto, Tipo_Item_id) VALUES ('Pirulito big big', 1.00, 'bigbig.jpg', 3);
+INSERT INTO Item (Descricao, Valor, Foto, Tipo_Item_id) VALUES ('Dadinho', 0.50, 'dadinho.jpg', 3);
 
 INSERT INTO Estoque (Lote, Quant_Disp, Validade, Item_id) VALUES (14785236, '7', '2023-04-26', '1');
 INSERT INTO Estoque (Lote, Quant_Disp, Validade, Item_id) VALUES (14527895, '12', '2025-10-20', '2');

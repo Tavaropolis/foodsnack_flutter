@@ -43,11 +43,12 @@ class _CartaoState extends State<Cartao> {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(8.0),
                     child: Image(
-                        height: 0.15 * MediaQuery.of(context).size.height,
-                        width: 0.25 * MediaQuery.of(context).size.width,
-                        fit: BoxFit.cover,
-                        image: AssetImage(
-                            "assets/products/${widget.produto.foto}")),
+                      height: 0.15 * MediaQuery.of(context).size.height,
+                      width: 0.25 * MediaQuery.of(context).size.width,
+                      fit: BoxFit.cover,
+                      image:
+                          AssetImage("assets/products/${widget.produto.foto}"),
+                    ),
                   ),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.start,

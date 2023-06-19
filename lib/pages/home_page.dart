@@ -45,39 +45,45 @@ class _HomePageState extends State<HomePage> {
       ...salgados.rows
           .map((e) => Produto(
               nome: e.typedColByName("Descricao"),
-              preco: num.parse(e.typedColByName("Valor"))))
+              preco: num.parse(e.typedColByName("Valor")),
+              foto: e.typedColByName("Foto") ?? "semfoto.jpg"))
           .toList(),
-      Produto(nome: "Coxinha", preco: 5.00, foto: "coxinha.jpg"),
     ];
+
+    listaSalgados.sort((Produto a, Produto b) => a.nome.compareTo(b.nome));
 
     listaDoces = [
       ...doces.rows
           .map((e) => Produto(
               nome: e.typedColByName("Descricao"),
-              preco: num.parse(e.typedColByName("Valor"))))
+              preco: num.parse(e.typedColByName("Valor")),
+              foto: e.typedColByName("Foto") ?? "semfoto.jpg"))
           .toList(),
       Produto(nome: "Pé de moça", preco: 5.00, foto: "pedemoca.jpg")
     ];
+
+    listaDoces.sort((Produto a, Produto b) => a.nome.compareTo(b.nome));
 
     listaBebidas = [
       ...bebidas.rows
           .map((e) => Produto(
               nome: e.typedColByName("Descricao"),
-              preco: num.parse(e.typedColByName("Valor"))))
+              preco: num.parse(e.typedColByName("Valor")),
+              foto: e.typedColByName("Foto") ?? "semfoto.jpg"))
           .toList(),
-      Produto(nome: "Coca-cola", preco: 5.00, foto: "cocacola.jpg"),
       Produto(nome: "Tampico", preco: 6.00, foto: "tampico.jpg")
     ];
 
+    listaBebidas.sort((Produto a, Produto b) => a.nome.compareTo(b.nome));
+
     setState(() {});
   }
-
+  
   @override
   Widget build(BuildContext context) {
     return Fundo(
       child: ListView(
         children: [
-          const SearchBox(),
           const TituloContainer(nome: "Salgados"),
           ContainerHome(listaCartoes: listaSalgados),
           const TituloContainer(nome: "Doces"),
