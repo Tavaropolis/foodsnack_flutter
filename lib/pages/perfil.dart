@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+
+//Classes
+import '../../classes/cliente.dart';
 
 //Componentes
 import '../components/fundo.dart';
@@ -13,6 +17,8 @@ class Perfil extends StatefulWidget {
 }
 
 class _PerfilState extends State<Perfil> {
+  var localFormat = DateFormat("dd/MM/yyyy");
+  
   @override
   Widget build(BuildContext context) {
     return Fundo(
@@ -35,9 +41,9 @@ class _PerfilState extends State<Perfil> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const DadosUsuario(texto: "Nome: Usuário"),
-                        DadosUsuario(texto: "Data de Nascimento: ${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year}"),
-                        const DadosUsuario(texto: "Tipo de conta: Usuário"),
+                        DadosUsuario(texto: "Nome: ${clienteLogado.nome}"),
+                        DadosUsuario(texto: "Data de Nascimento: ${localFormat.format(clienteLogado.dtaNasc).toString()}"),
+                        const DadosUsuario(texto: "Tipo de conta: Cliente"),
                       ],
                     ),
                   ),
