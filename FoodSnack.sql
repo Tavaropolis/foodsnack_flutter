@@ -44,10 +44,8 @@ CREATE TABLE IF NOT EXISTS Pedido (
 	Cliente_CPF VARCHAR(11) NOT NULL,
 	Funcionario_Matricula INT NOT NULL,
 	PRIMARY KEY (Numero, Cliente_CPF, Funcionario_Matricula),
-    FOREIGN KEY (Cliente_CPF) REFERENCES Cliente(CPF),
+    FOREIGN KEY (Cliente_CPF) REFERENCES Cliente(CPF) ON DELETE CASCADE,
     FOREIGN KEY (Funcionario_Matricula) REFERENCES Funcionario(Matricula));
-    
-SELECT * FROM Cliente;
     
 CREATE TABLE IF NOT EXISTS Estoque (
 	Lote INT NOT NULL,
@@ -682,4 +680,5 @@ SELECT SUM(Valor * Pedido_has_Estoque.Quantidade ) FROM Item, Estoque, Pedido_ha
                                                                 GROUP BY Pedido_has_Estoque.Numero;
 
 
-
+SELECT * FROM Cliente;
+SELECT * FROM foodsnackachive.ClienteArchive;
