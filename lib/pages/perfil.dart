@@ -7,6 +7,7 @@ import '../../classes/cliente.dart';
 //Componentes
 import '../components/fundo.dart';
 import '../components/perfil/dados_perfil.dart';
+import '../components/perfil/modal_perfil.dart';
 import '../components/titulo_pagina.dart';
 
 class Perfil extends StatefulWidget {
@@ -18,7 +19,7 @@ class Perfil extends StatefulWidget {
 
 class _PerfilState extends State<Perfil> {
   var localFormat = DateFormat("dd/MM/yyyy");
-  
+
   @override
   Widget build(BuildContext context) {
     return Fundo(
@@ -42,8 +43,22 @@ class _PerfilState extends State<Perfil> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         DadosUsuario(texto: "Nome: ${clienteLogado.nome}"),
-                        DadosUsuario(texto: "Data de Nascimento: ${localFormat.format(clienteLogado.dtaNasc).toString()}"),
+                        DadosUsuario(
+                            texto:
+                                "Data de Nascimento: ${localFormat.format(clienteLogado.dtaNasc).toString()}"),
                         const DadosUsuario(texto: "Tipo de conta: Cliente"),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: ElevatedButton(
+                              onPressed: () {
+                                showModalBottomSheet<void>(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return const ModalPerfil();
+                                    });
+                              },
+                              child: const Text("Apagar conta")),
+                        )
                       ],
                     ),
                   ),
@@ -63,5 +78,3 @@ class _PerfilState extends State<Perfil> {
     );
   }
 }
-
-
