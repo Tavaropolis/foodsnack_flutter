@@ -46,7 +46,7 @@ class _LoginState extends State<Login> {
                   decoration: const InputDecoration(
                       fillColor: Colors.orange,
                       filled: true,
-                      labelText: "Insira seu usuário",
+                      labelText: "Insira seu CPF",
                       border: OutlineInputBorder())),
             ),
             const SizedBox(height: 20),
