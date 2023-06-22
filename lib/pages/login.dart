@@ -43,6 +43,7 @@ class _LoginState extends State<Login> {
                   },
                   keyboardType: TextInputType.emailAddress,
                   autocorrect: true,
+                  maxLength: 11,
                   decoration: const InputDecoration(
                       fillColor: Colors.orange,
                       filled: true,

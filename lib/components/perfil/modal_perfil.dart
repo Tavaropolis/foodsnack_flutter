@@ -107,7 +107,7 @@ class _ModalPerfilState extends State<ModalPerfil> {
                       fillColor: Colors.white,
                       filled: true,
                       labelText: "Insira sua senha",
-                      border: OutlineInputBorder())),
+                      border: const OutlineInputBorder())),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
