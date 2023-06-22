@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:projeto_integrado/components/carrinho/modal_limpa_carrinho.dart';
+
+//Componentes
+import 'modal_finalizar_carrinho.dart';
+import 'modal_limpa_carrinho.dart';
 
 class BotoesCarrinho extends StatelessWidget {
   const BotoesCarrinho({
@@ -32,7 +35,13 @@ class BotoesCarrinho extends StatelessWidget {
           height: 50,
           child: ElevatedButton(
             child: const Text("Finalizar"),
-            onPressed: () {},
+            onPressed: () {
+              showModalBottomSheet<void>(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return const ModalFinalizarCarrinho();
+                    });
+            },
           ),
         ),
       )
