@@ -31,7 +31,6 @@ dependencies:
   flutter:
     sdk: flutter
 
-
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
@@ -50,11 +49,13 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
+  msix: ^3.14.2
 
 flutter_launcher_icons:
   image_path: "assets/images/logo.jpg" 
   android: true
   ios: true
+
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
@@ -102,3 +103,12 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+msix_config:
+  display_name: Foodsnak
+  publisher_display_name: Grupo do Fundão
+  identity_name: grupo.fundao.foodsnak
+  msix_version: 1.0.0.0
+  logo_path: ./assets/images/local.png
+  certificate_path: ./Privado.pfx
+  certificate_password: 1234
+  capabilities: internetClient, location, microphone, webcam
